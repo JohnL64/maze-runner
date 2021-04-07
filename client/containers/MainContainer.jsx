@@ -228,17 +228,31 @@ class MainContainer extends Component {
         }
       }
       // queue -------> [{'0,0': {visited: true}}]
+      
+      // **TPT** Daryl code section apart of the Algorithym, specifically the helper function
+      // I'm assuming this to be the position handling logic
+      // Queue is an array of objects with the keys being coordinates
+      // Create's a const variable position, and assigns the keys of the zero index of the passed in queue
+      // The zero position is expected to be an object, and the key is expected to be an string of a coordinate '0,0'
+      // position = ['0,0'] example
       const position = Object.keys(queue[0]);
-      // position = ['0,0']
+      
+      // Extracting value of the zero index of position. It was only an array with a single element anyway.
+      // string -> '0,0' example
       let string = position[0];
-      // string -> '0,0'
-      const arrPosition = position[0].split(',');
+      
+      // Further conversion to turn the string of coordinates into a array of coordinates, using split
       // 'arrPosition -> ['0', '0']
+      const arrPosition = position[0].split(',');
       // console.log('arrPosition', JSON.stringify(arrPosition))
-      //want to check [-1,0] [1,0] [0,1] [0,-1]
+      
+      // For loop to specific coordinate positions
+      // want to check [-1,0] [1,0] [0,1] [0,-1]
       // i = -1 and i = 1
       for (let i = -1; i < 2; i++) {
+        // For loop only runs on -1 and 1. They are using the loop to simply check 4 coordinate sets.
         if (i !== 0) {
+          // NewPosition & NewPosition2 are simply
           const newPosition = `${Number(arrPosition[0]) + i},${Number(
             arrPosition[1]
           )}`; // <--- '-1,0'
