@@ -1,7 +1,7 @@
 # # Created by .ignore support plugin (hsz.mobi)
 # ### macOS template
 # # General
-# *.DS_Store
+*.DS_Store
 
 # ### IntelliJ project files
 # .idea
@@ -65,7 +65,7 @@ node_modules/
 # .yarn-integrity
 
 # # dotenv environment variables file
-# .env
+.env
 
 # # dist folder should be re-bundled
 # dist
