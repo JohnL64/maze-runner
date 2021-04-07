@@ -129,7 +129,8 @@ class MainContainer extends Component {
     //  this.setState({board: board});
     //  console.log("HOVERING")kjhkjhkjhkj
   }
-
+  
+  //Event Listener for releasing mouse, updated states "mouseIsPressed"
   handleMouseUp() {
     console.log('mouseUP');
     if (this.state.wallMode === false) return;
@@ -137,17 +138,20 @@ class MainContainer extends Component {
     // console.log("MOUSE UP")
   }
 
+  //Event Listener for establishing position of the "head" node. Updates the state "headPosition" with value "coordinates" 
   handleHead(coordinates) {
     if (this.state.entryNodeMode === false) return;
     this.setState({ headPosition: coordinates });
   }
 
+  //Event Listener for establishing position of the "target" node. Updates the state "headPosition" with value "coordinates" 
   handleTarget(coordinates) {
     //coordinates = '0,2'
     if (this.state.targetNodeMode === false) return;
     this.setState({ targetPosition: coordinates });
   }
 
+  //Helper function to reset state to default position.
   clearBoard() {
     const board = {};
     for (let i = 0; i < 15; i++) {
@@ -168,14 +172,18 @@ class MainContainer extends Component {
     });
   }
 
+  //Start of the Dijkstra's algorithm
   algorithm() {
     /////
     if (this.state.path.length !== 0) {
+      // BOARD - this tracks a state of the board - REMEMBER: Board is a GIANT obj {'0,0': {visted:false}, '0,1': {visted:false}, ...}
       const board = Object.assign(this.state.board);
       console.log('1', JSON.stringify(board));
       for (const property in board) {
         // console.log(this.state.board[property])
+        // Looks like we're resetting all visited values to false at the start of the Algo
         board[property].visited = false;
+        // Resetting any previous board props that had a previousNode prop and 
         if (board[property].previousNode) delete board[property].previousNode;
       }
       console.log('2', JSON.stringify(board));
@@ -184,7 +192,8 @@ class MainContainer extends Component {
         path: [],
       });
     }
-
+    
+    // NODES - is a copy of the board state
     const nodes = Object.assign(this.state.board);
     // for (let i = 0; i < 10; i++) {
     //   for (let j = 0; j < 10; j++) {
@@ -193,30 +202,64 @@ class MainContainer extends Component {
     //     }
     //   }
     // }
+
+    // HEAD - tracks start position, is a string 'x,y' which is also a prop in the board 
     const head = this.state.headPosition;
+    // TARGET - tracks target position, is a string 'y,x' which is also a prop in the board 
     const target = this.state.targetPosition;
     // const target = nodes['2,1']
 
+    // Changes the NodeBoard, head position visited defaulting to true
     nodes[head].visited = true;
+
+    // Changes the NodeBoard, this is where we create a new property PREVIOUSNODE to the NodeBoard
+    // Defaulting the head coordinates to have previousNode property to be null
     nodes[head].previousNode = null;
+
     // nodes['0,0'].head = true;
     // nodes['2,1'].target = true;
+
+    // Creating QUEUE array
+    // Each element is an object
+    // We initialize to have 1 obj with a prop of the head coordinates from the regular Board. An array coerced into a string as the key
+      // And it's value is the head coordinates from the NodeBoard
+
+    /* example
+    queue = [
+      {
+        'x,y': {
+               visited: true,
+               previousNode: null
+               }  
+      },
+      ...
+    ]
+    */ 
     const queue = [{ [head]: nodes[head] }];
+
+    // FIRE is a shallow copy of the onFire array from state 
     const fire = this.state.onFire.slice();
 
     // // console.log(nodes)
 
+    // HELPER - function with two parameters, both are arrays.
     function helper(queue, fire) {
       // console.log('base queue every time helper is called', JSON.stringify(queue))
       console.log('fireeee', fire);
       for (let i = 0; i < queue.length; i++) {
+        // Looping through queue array to find the target coordinates
         if (Object.keys(queue[i]) == target) {
           const path = [];
           // console.log('queuei', JSON.parse(JSON.stringify(queue[i])));
+
+          // PREVIOUSNODE variable to track what we just found in the loop
+          // Used for ease of reading code in next few lines  
           let previousNode = queue[i][target].previousNode;
-          //
+  
           // console.log('previousNode', previousNode)
           // console.log('previousNode', Object.keys(previousNode))
+
+          // Creating path array
           while (previousNode !== null) {
             // let key = Object.keys(previousNode);
             path.push(previousNode);
