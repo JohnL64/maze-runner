@@ -50,7 +50,17 @@ module.exports = {
     extensions: ['.js', '.jsx'],
   },
   devServer: {
+    publicPath: '/build',
+    contentBase: path.join(__dirname, 'client'),
+    proxy: {
+      '/api': {
+        target: 'http://localhost:3000',
+        secure: false,
+      },
+    },
     port: 8080,
+    host: '0.0.0.0',
+    hot: true,
     historyApiFallback: {
       index: '/client/index.html',
     },

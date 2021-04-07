@@ -21,17 +21,49 @@ boardStateController.getInitialState = (req, res, next) => {
   } catch (err) {next(err);}
 };
 
-// Save board state results
-boardStateController.getInitialState = (req, res, next) => {
+// Archetype controller method
+boardStateController.retrieveState = (req, res, next) => {
   // create an initialStateQuery
-  const initialStateQuery = 
+  const retrieveStateQuery = 
     `SELECT ***
     FROM ****
     `;
   try {
-    db.query(initialStateQuery, (err, result) => {
+    db.query(retrieveStateQuery, (err, result) => {
       const {rows} = result;
-      res.locals.initialState = rows;
+      res.locals.specificState = rows;
+      return next();
+    });
+  } catch (err) {next(err);}
+};
+
+// Save board state results
+boardStateController.saveBoardState = (req, res, next) => {
+  // create an saveStateQuery
+  const saveStateQuery = 
+    `SELECT ***
+    FROM ****
+    `;
+  try {
+    db.query(saveStateQuery, (err, result) => {
+      const {rows} = result;
+      res.locals.savedState = rows;
+      return next();
+    });
+  } catch (err) {next(err);}
+};
+
+// Delete board state
+boardStateController.deleteBoardState = (req, res, next) => {
+  // create an deleteStateQuery
+  const deleteStateQuery = 
+    `SELECT ***
+    FROM ****
+    `;
+  try {
+    db.query(deleteStateQuery, (err, result) => {
+      const {rows} = result;
+      res.locals.deletedState = rows;
       return next();
     });
   } catch (err) {next(err);}
