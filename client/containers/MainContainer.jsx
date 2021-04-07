@@ -233,7 +233,7 @@ class MainContainer extends Component {
       // I'm assuming this to be the position handling logic
       // Queue is an array of objects with the keys being coordinates
       // Create's a const variable position, and assigns the keys of the zero index of the passed in queue
-      // The zero position is expected to be an object, and the key is expected to be an string of a coordinate '0,0'
+      // The zero position is expected to be an object, and the key is expected to be an string of a coordinate like '0,0'
       // position = ['0,0'] example
       const position = Object.keys(queue[0]);
       
@@ -252,7 +252,7 @@ class MainContainer extends Component {
       for (let i = -1; i < 2; i++) {
         // For loop only runs on -1 and 1. They are using the loop to simply check 4 coordinate sets.
         if (i !== 0) {
-          // NewPosition & NewPosition2 are simply
+          // NewPosition & NewPosition2 are simply coordinate constructors in both the x and y direction
           const newPosition = `${Number(arrPosition[0]) + i},${Number(
             arrPosition[1]
           )}`; // <--- '-1,0'
@@ -261,18 +261,29 @@ class MainContainer extends Component {
           }`; // <--- '0,-1'
           // console.log('new', 'i', i, newPosition, newPosition2)
           // console.log('check','i', i, nodes[newPosition])
+          
+          // This logic checks first that the newly constructed position exists on the board and that it has not been visited
+          // The nodes object has been assigned the via Object.assign the value of the board
+          // Board is an object containing all possible node coordinates of the board
           if (
             nodes[newPosition] !== undefined &&
             nodes[newPosition].visited === false
           ) {
+            // if the node exists and it has not been visited, reassign visited to true
             nodes[newPosition].visited = true;
+            // and push the new position into the fire array
             fire.push(newPosition);
             // console.log("WHY THE FUCK", nodes[newPosition])
 
-            nodes[newPosition].previousNode = string;
+            // for this newPosition node, assign the string variable to the previousNode property
             // nodes[newPosition].previousNode = {[position]: nodes[position]};
+            nodes[newPosition].previousNode = string;
+
+            // push this newPositionNode as a key/value pair into the queue
             queue.push({ [newPosition]: nodes[newPosition] });
-          }
+          } 
+
+          // this if for newPosition2 is a carbon copy of newPosition
           if (
             nodes[newPosition2] !== undefined &&
             nodes[newPosition2].visited === false
@@ -285,27 +296,47 @@ class MainContainer extends Component {
           }
         }
       }
+      
+      // After the helper logic has been performed remove the first node from the queue with shift
       queue.shift();
+      // console.log to check the new queue list
       console.log('queue', queue);
+      // Base case, if the queue is now empty, return undefined
       if (queue.length === 0) {
         return undefined;
       } // <--- removes first element from array
       // console.log('queueEEE', JSON.stringify(queue))
       // console.log('NODEEEEEE', JSON.stringify(nodes))
+      
+      // recursive call of the helper path finder function, pass in a slice copy of the queue and pass through the fire logic
       return helper(queue.slice(), fire);
     }
 
+    // Initial invocation of the path finder helper function, assigns the return value to array
     const array = helper(queue, fire);
+    
+    // if array is undefined, it means that recursive finder made it to all the available positions on the board and couldn't reach the target
     if (array === undefined) {
       alert('No path found. Try again.');
     }
+
+    // removes the ending position of the array, which would be the target. Don't need to do anything on the target square
+    // that's our target
     array.pop();
+    
+    // reverse the array of nodes and assigns it to path
     const path = array.reverse();
-    console.log('path', path);
-    console.log('fire', fire);
+    
     // console.log(helper(queue))
     // console.log('2', path)
+    console.log('path', path);
+    console.log('fire', fire);
+
+    // removes the ending position of fire which would be the head. Don't need to do anything on the initial path finder head square
+    // that's our character
     fire.pop();
+
+    // assigns a slice copy of fire to finalFire
     const finalFire = fire.slice();
 
     setTimeout(
@@ -318,7 +349,8 @@ class MainContainer extends Component {
       }.bind(this),
       finalFire.length * 25
     );
-
+    
+    // updates state with set state and passes in the assembled path and finalFire values
     this.setState({ path: path, onFire: finalFire });
   }
 
