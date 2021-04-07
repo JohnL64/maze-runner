@@ -41,8 +41,11 @@ class MainContainer extends Component {
 
   // [{x:0, y:0}, {x:0, y:1}, {x:0, y:2} {x:1, y:0}, {x:1, y:1}, {x:1, y:2}]
 
+  // CREATES THE BOARD ON INITIAL MOUNT
   componentDidMount() {
     const board = {};
+    // CREATES AN OBJECT AND ADDS A PROPERTY ON EACH ITERATION WHERE THE KEY IS THE CURRENT I AND J ITERATORS 
+    //AND THE VALUE IS SET TO AN OBJECT WITH A KEY OF VISITED WITH THE VALUE OF FALSE
     this.state.onFire = [];
     for (let i = 0; i < 15; i++) {
       for (let j = 0; j < 30; j++) {
@@ -51,11 +54,13 @@ class MainContainer extends Component {
         };
       }
     }
+    // SETS THE BOARD PROPERTY'S VALUE IN STATE TO THIS NEWLY CREATED OBJECT
     this.setState({ board });
     console.log(this.state);
   }
-
-  addWallMode() {
+  
+  // CHANGES THE MODE OF THE APP TO WALL BUIDLING MODE
+  addWallMode() { 
     this.setState(
       {
         entryNodeMode: false,
@@ -67,7 +72,8 @@ class MainContainer extends Component {
       }
     );
   }
-
+  
+  // CHANGES THE MODE OF THE APP TO ENRTY NODE MODE
   entryNodeMode() {
     this.setState(
       {
@@ -81,6 +87,7 @@ class MainContainer extends Component {
     );
   }
 
+  //CHANGES THE MODE OF THE APP TO TARGET NODE MODE
   targetNodeMode() {
     this.setState(
       {
@@ -94,12 +101,19 @@ class MainContainer extends Component {
     );
   }
 
+  // THE BOX ON THE BOARD WHERE THE MOUSE POINTER IS WHEN THE MOUSE BUTTON IS HELD DOWN THAT BOX'S 
+  //VISITED AND WALL PROPERTY ARE CHANGED TO TRUE. THEN UPDATED TO STATE
   handleMouseDown(property) {
     console.log(property);
+    // IF APP IS NOT CURRENTLY IN WALL BUILDING MODE DO NOTHING
     if (this.state.wallMode === false) {
       return;
     }
+
+
     const board = { ...this.state.board };
+    // CHANGES THE VISITED PROPERTY AND THE WALL PROPERTY TO TRUE IN THE GIVEN PROPERTY IN BOARD
+
     board[property].visited = true;
     board[property].wall = true;
     this.setState({ board: board, mouseIsPressed: true });
@@ -112,6 +126,9 @@ class MainContainer extends Component {
   // <button2 onmousedown={() => {handleMouseDown(x,y); handleMouseEnter(x,y);}
   // onmouseup={()=>{handleMouseUp(x,y)}}
   //}><button/>
+
+  // CHANGES THE VISITED PROPERTY AND THE WALL PROPERTY TO TRUE IN THE GIVEN PROPERTY IN BOARD ONLY IF THE WALL MODE
+  //IN APP IS TRUE AND IF MOUSEISPRESSED IS TRUE
   handleMouseEnter(property) {
     if (this.state.wallMode === false || this.state.mouseIsPressed === false) {
       // console.log('wtf this is false');
