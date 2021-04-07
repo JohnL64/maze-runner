@@ -1,13 +1,12 @@
 import React, { useState } from 'react';
 import board from './board';
-import buttons from './buttons';
 import '../styles.scss';
 
 const eventHandlers = {};
 
 // THE BOX ON THE BOARD WHERE THE MOUSE POINTER IS WHEN THE MOUSE BUTTON IS HELD DOWN THAT BOX'S 
   //VISITED AND WALL PROPERTY ARE CHANGED TO TRUE. THEN UPDATED TO STATE
-  eventHandlers.handleMouseDown = (/* button property */property) => {
+  eventHandlers.handleMouseDown = (property) => {
     console.log(property);
     // IF APP IS NOT CURRENTLY IN WALL BUILDING MODE DO NOTHING
     if (state.wallMode === false) {
@@ -18,8 +17,8 @@ const eventHandlers = {};
     const board = { ...state.board };
     // CHANGES THE VISITED PROPERTY AND THE WALL PROPERTY TO TRUE IN THE GIVEN PROPERTY IN BOARD
 
-    board[/* button. */property].visited = true;
-    board[/* button. */property].wall = true;
+    board[property].visited = true;
+    board[property].wall = true;
     setState({ board: board, mouseIsPressed: true });
     console.log('MOUSE DOWN');
     console.log(board);
@@ -33,14 +32,14 @@ const eventHandlers = {};
 
   // CHANGES THE VISITED PROPERTY AND THE WALL PROPERTY TO TRUE IN THE GIVEN PROPERTY IN BOARD ONLY IF THE WALL MODE
   //IN APP IS TRUE AND IF MOUSEISPRESSED IS TRUE
-  eventHandlers.handleMouseEnter = (/* button property */property) => {
+  eventHandlers.handleMouseEnter = (property) => {
     if (state.wallMode === false || state.mouseIsPressed === false) {
       // console.log('wtf this is false');
       return;
     }
     const board = { ...state.board };
-    board[/* button. */property].visited = true;
-    board[/* button. */property].wall = true;
+    board[property].visited = true;
+    board[property].wall = true;
     setState({ board: board });
     // console.log(board)
     //  if (!this.state.mouseIsPressed) return;
@@ -60,13 +59,13 @@ const eventHandlers = {};
   }
 
   //Event Listener for establishing position of the "head" node. Updates the state "headPosition" with value "coordinates" 
-  eventHandlers.handleHead = (/* button coordinates */coordinates) => {
+  eventHandlers.handleHead = (coordinates) => {
     if (state.entryNodeMode === false) return;
     setState({ headPosition: coordinates });
   }
 
   //Event Listener for establishing position of the "target" node. Updates the state "headPosition" with value "coordinates" 
-  eventHandlers.handleTarget = (/* button coordinates */coordinates) => {
+  eventHandlers.handleTarget = (coordinates) => {
     //coordinates = '0,2'
     if (state.targetNodeMode === false) return;
     setState({ targetPosition: coordinates });
@@ -93,4 +92,4 @@ const eventHandlers = {};
     });
   }
 
-  export default eventHandlers
+  export default eventHandlers;
