@@ -339,6 +339,7 @@ class MainContainer extends Component {
     // assigns a slice copy of fire to finalFire
     const finalFire = fire.slice();
 
+    // setTimeout to reset the state of onFire & path on the board. This is based on the length of the finalFire variable
     setTimeout(
       function () {
         console.log('settimeeout');
@@ -354,17 +355,24 @@ class MainContainer extends Component {
     this.setState({ path: path, onFire: finalFire });
   }
 
+  // kicking off the render for the whole application
   render() {
+    // passing in some intial state
     const { board } = this.state;
     const grid = [];
 
+    // creates a for loop to go through every poperty on the board (all the nodes)
     for (const property in board) {
+      // a new name assignment for each property to id
       let id = property;
 
+      // conditional check to see if the onFire array has this node and the onFire array is not empty
       if (
         this.state.onFire.includes(property) &&
         this.state.onFire.length !== 0
       ) {
+        // if the node is in the onFire array then push it into the grid array as a button with several properties
+        // give the button an id passing in the id variable, and a className by concatenating a string with the index of the property
         grid.push(
           <button
             id={id}
