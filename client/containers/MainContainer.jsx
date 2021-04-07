@@ -579,9 +579,11 @@ class MainContainer extends Component {
         );
       }
     }
+    //Final Render
     return (
       <div>
         <div className="navbar">
+          {/* Render Navbar, passing in functions for the buttons as props */}
           <Navbar
             clearBoard={this.clearBoard}
             runAlgo={this.algorithm}
@@ -590,7 +592,9 @@ class MainContainer extends Component {
             targetNodeMode={this.targetNodeMode}
           />
         </div>
+        {/* Gap div to ensure navbar does not overlap main body */}
         <div className="gap"></div>
+        {/* Main grid container */}
         <div className="gridContainer">{grid}</div>
       </div>
     );
