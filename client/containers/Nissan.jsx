@@ -217,16 +217,16 @@ nissan.algorithm = (props) => {
   setTimeout(
     function () {
       console.log('settimeeout');
-      return this.setState({
+      return props.setState({
         onFire: [],
         path: path,
       });
-    }.bind(this),
+    },
     finalFire.length * 25
   );
   
   // updates state with set state and passes in the assembled path and finalFire values
-  this.setState({ path: path, onFire: finalFire });
+  props.setState({ path: path, onFire: finalFire });
 }
 
   export default nissan;
