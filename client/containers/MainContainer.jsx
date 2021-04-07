@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/mouse-events-have-key-events */
 /**
  * ************************************
  *
@@ -345,9 +346,11 @@ class MainContainer extends Component {
         );
         // }
       }
-      // if(this.state.path.includes(property))
-      // }
+      
+      // IF we are NOT currently on Fire (aka not searching for the destination)
+      // ... but the current grid-square is contained within the found path array ...
       else if (this.state.path.includes(property)) {
+        // Push a .path button to the grid
         grid.push(
           <button
             id={id}
@@ -369,7 +372,10 @@ class MainContainer extends Component {
             }}
           ></button>
         );
+      // IF we are NOT currently on Fire (aka not searching for the destination)
+      // ... but we are looking at the starting square
       } else if (property === this.state.headPosition) {
+        // push a .head square to the grid
         grid.push(
           <button
             id={id}
@@ -389,7 +395,10 @@ class MainContainer extends Component {
             }}
           ></button>
         );
+      // IF we are NOT currently on Fire (aka not searching for the destination)
+      // ... but we are looking at the target square
       } else if (property === this.state.targetPosition) {
+        // push a .target square to the grid
         grid.push(
           <button
             id={id}
@@ -409,7 +418,10 @@ class MainContainer extends Component {
             }}
           ></button>
         );
+      // IF we are NOT currently on Fire (aka not searching for the destination)
+      // ... but we are looking at a section of the user input wall...
       } else if (board[property].wall === true) {
+        // push a .wallGrid square to the grid
         grid.push(
           <button
             id={id}
@@ -429,7 +441,10 @@ class MainContainer extends Component {
             }}
           ></button>
         );
+      // IF we are NOT currently on Fire (aka not searching for the destination)
+      // ... and we've determined that we're not looking at a start, target or wall square:
       } else {
+        // push a .regularGrid square to the grid.
         grid.push(
           <button
             id={id}
@@ -451,7 +466,6 @@ class MainContainer extends Component {
         );
       }
     }
-
     return (
       <div>
         <div className="navbar">
