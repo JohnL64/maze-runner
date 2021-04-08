@@ -12,9 +12,9 @@
 import React, { Component } from 'react';
 import Navbar from '../Navbar.jsx';
 import '../styles.scss';
-import Nissan from './Nissan.jsx'
-import Board from './board.jsx'
-import EventHandlers from './eventHandlers.jsx'
+import Nissan from './Nissan.jsx';
+import Board from './Board.jsx';
+import EventHandlers from './eventHandlers.jsx';
 
 // import from child components...
 
@@ -38,8 +38,8 @@ class MainContainer extends Component {
     this.addWallMode = this.addWallMode.bind(this);
     this.entryNodeMode = this.entryNodeMode.bind(this);
     this.targetNodeMode = this.targetNodeMode.bind(this);
-    this.algorithm = this.algorithm.bind(this);
-    this.clearBoard = this.clearBoard.bind(this);
+    //this.algorithm = this.algorithm.bind(this);
+    //this.clearBoard = this.clearBoard.bind(this);
   }
 
   // [{x:0, y:0}, {x:0, y:1}, {x:0, y:2} {x:1, y:0}, {x:1, y:1}, {x:1, y:2}]
@@ -49,7 +49,7 @@ class MainContainer extends Component {
     const board = {};
     // CREATES AN OBJECT AND ADDS A PROPERTY ON EACH ITERATION WHERE THE KEY IS THE CURRENT I AND J ITERATORS 
     //AND THE VALUE IS SET TO AN OBJECT WITH A KEY OF VISITED WITH THE VALUE OF FALSE
-    this.state.onFire = [];
+    this.setState({ onFire: []}); // a hack?
     for (let i = 0; i < 15; i++) {
       for (let j = 0; j < 30; j++) {
         board[`${i},${j}`] = {
@@ -106,7 +106,6 @@ class MainContainer extends Component {
 
   // kicking off the render for the whole application
   render() {
-    Board();
     //Final Render
     return (
       <div>
@@ -123,7 +122,9 @@ class MainContainer extends Component {
         {/* Gap div to ensure navbar does not overlap main body */}
         <div className="gap"></div>
         {/* Main grid container */}
-        <div className="gridContainer">{grid}</div>
+        <div className="gridContainer">
+          <Board state={this.state} EventHandlers={EventHandlers} />
+        </div>
       </div>
     );
   }
