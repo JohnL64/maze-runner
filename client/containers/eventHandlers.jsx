@@ -6,7 +6,7 @@ const eventHandlers = {};
 
 // THE BOX ON THE BOARD WHERE THE MOUSE POINTER IS WHEN THE MOUSE BUTTON IS HELD DOWN THAT BOX'S 
   //VISITED AND WALL PROPERTY ARE CHANGED TO TRUE. THEN UPDATED TO STATE
-  eventHandlers.handleMouseDown = (property) => {
+  eventHandlers.handleMouseDown = (property, state, setState) => {
     console.log(property);
     // IF APP IS NOT CURRENTLY IN WALL BUILDING MODE DO NOTHING
     if (state.wallMode === false) {
@@ -32,7 +32,7 @@ const eventHandlers = {};
 
   // CHANGES THE VISITED PROPERTY AND THE WALL PROPERTY TO TRUE IN THE GIVEN PROPERTY IN BOARD ONLY IF THE WALL MODE
   //IN APP IS TRUE AND IF MOUSEISPRESSED IS TRUE
-  eventHandlers.handleMouseEnter = (property) => {
+  eventHandlers.handleMouseEnter = (property, state, setState) => {
     if (state.wallMode === false || state.mouseIsPressed === false) {
       // console.log('wtf this is false');
       return;
@@ -51,45 +51,27 @@ const eventHandlers = {};
   }
   
   //Event Listener for releasing mouse, updated states "mouseIsPressed"
-  eventHandlers.handleMouseUp = () => {
+  eventHandlers.handleMouseUp = (state, setState) => {
     console.log('mouseUP');
-    if (tstate.wallMode === false) return;
+    if (state.wallMode === false) return;
     setState({ mouseIsPressed: false });
     // console.log("MOUSE UP")
   }
 
   //Event Listener for establishing position of the "head" node. Updates the state "headPosition" with value "coordinates" 
-  eventHandlers.handleHead = (coordinates) => {
+  eventHandlers.handleHead = (coordinates, state, setState) => {
     if (state.entryNodeMode === false) return;
     setState({ headPosition: coordinates });
   }
 
   //Event Listener for establishing position of the "target" node. Updates the state "headPosition" with value "coordinates" 
-  eventHandlers.handleTarget = (coordinates) => {
+  eventHandlers.handleTarget = (coordinates, state, setState) => {
     //coordinates = '0,2'
     if (state.targetNodeMode === false) return;
     setState({ targetPosition: coordinates });
   }
 
   //Helper function to reset state to default position.
-  eventHandlers.clearBoard = () => {
-    const board = {};
-    for (let i = 0; i < 15; i++) {
-      for (let j = 0; j < 30; j++) {
-        board[`${i},${j}`] = {
-          visited: false,
-        };
-      }
-    }
-    setState({
-      board: board,
-      mouseIsPressed: false,
-      entryNodeMode: false,
-      targetNodeMode: false,
-      wallMode: false,
-      path: [],
-      onFire: [],
-    });
-  }
+  
 
   export default eventHandlers;
