@@ -5,10 +5,10 @@ import toJson from 'enzyme-to-json';
 
 configure({adapter: new Adapter()});
 
-describe('All tests', () => {
-  describe('Put tests here', () => {});
-  describe('Put tests here', () => {});
-  describe('Put tests here', () => {});
-  describe('Put tests here', () => {});
-  describe('Put tests here', () => {});
+xdescribe('All tests', () => {
+  xdescribe('Put tests here', () => {});
+  xdescribe('Put tests here', () => {});
+  xdescribe('Put tests here', () => {});
+  xdescribe('Put tests here', () => {});
+  xdescribe('Put tests here', () => {});
 });
