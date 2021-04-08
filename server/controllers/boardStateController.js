@@ -22,7 +22,7 @@ boardStateController.getInitialState = (req, res, next) => {
 };
 
 // Archetype controller method
-boardStateController.retrieveState = (req, res, next) => {
+boardStateController.getSpecificState = (req, res, next) => {
   // create an initialStateQuery
   const retrieveStateQuery = 
     `SELECT ***

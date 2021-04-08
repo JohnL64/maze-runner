@@ -6,8 +6,9 @@
   "scripts": {
     "build": "cross-env NODE_ENV=production webpack",
     "dev": "NODE_ENV=development webpack serve --hot",
-    "dev-windows": "cross-env process.env.NODE_ENV=development concurrently \"webpack server --hot\" \" npm start\"",
-    "start": "cross-env NODE_ENV=development webpack serve --open --hot --inline --progress",
+    "dev-windows": "cross-env process.env.NODE_ENV=development concurrently \"webpack serve --open --inline --progress\" \" npm start\"",
+    "start-secondary": "cross-env NODE_ENV=development webpack serve --open --inline --progress",
+    "start": "nodemon server/server.js",
     "test": "echo Error: we don't have a test specified yet"
   },
   "repository": {
