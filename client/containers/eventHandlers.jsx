@@ -1,24 +1,25 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
+import board from './board';
 import '../styles.scss';
 
 const eventHandlers = {};
 
 // THE BOX ON THE BOARD WHERE THE MOUSE POINTER IS WHEN THE MOUSE BUTTON IS HELD DOWN THAT BOX'S 
   //VISITED AND WALL PROPERTY ARE CHANGED TO TRUE. THEN UPDATED TO STATE
-  eventHandlers.handleMouseDown = (property) => {
+  eventHandlers.handleMouseDown = (property, state, setState) => {
     console.log(property);
     // IF APP IS NOT CURRENTLY IN WALL BUILDING MODE DO NOTHING
-    if (this.state.wallMode === false) {
+    if (state.wallMode === false) {
       return;
     }
 
 
-    const board = { ...this.state.board };
+    const board = { ...state.board };
     // CHANGES THE VISITED PROPERTY AND THE WALL PROPERTY TO TRUE IN THE GIVEN PROPERTY IN BOARD
 
     board[property].visited = true;
     board[property].wall = true;
-    this.setState({ board: board, mouseIsPressed: true });
+    setState({ board: board, mouseIsPressed: true });
     console.log('MOUSE DOWN');
     console.log(board);
   }
@@ -31,15 +32,15 @@ const eventHandlers = {};
 
   // CHANGES THE VISITED PROPERTY AND THE WALL PROPERTY TO TRUE IN THE GIVEN PROPERTY IN BOARD ONLY IF THE WALL MODE
   //IN APP IS TRUE AND IF MOUSEISPRESSED IS TRUE
-  eventHandlers.handleMouseEnter = (property) => {
-    if (this.state.wallMode === false || this.state.mouseIsPressed === false) {
+  eventHandlers.handleMouseEnter = (property, state, setState) => {
+    if (state.wallMode === false || state.mouseIsPressed === false) {
       // console.log('wtf this is false');
       return;
     }
-    const board = { ...this.state.board };
+    const board = { ...state.board };
     board[property].visited = true;
     board[property].wall = true;
-    this.setState({ board: board });
+    setState({ board: board });
     // console.log(board)
     //  if (!this.state.mouseIsPressed) return;
     //  const board = this.state.board.slice();
@@ -50,45 +51,27 @@ const eventHandlers = {};
   }
   
   //Event Listener for releasing mouse, updated states "mouseIsPressed"
-  eventHandlers.handleMouseUp = () => {
+  eventHandlers.handleMouseUp = (state, setState) => {
     console.log('mouseUP');
-    if (this.state.wallMode === false) return;
-    this.setState({ mouseIsPressed: false });
+    if (state.wallMode === false) return;
+    setState({ mouseIsPressed: false });
     // console.log("MOUSE UP")
   }
 
   //Event Listener for establishing position of the "head" node. Updates the state "headPosition" with value "coordinates" 
-  eventHandlers.handleHead = (coordinates) => {
-    if (this.state.entryNodeMode === false) return;
-    this.setState({ headPosition: coordinates });
+  eventHandlers.handleHead = (coordinates, state, setState) => {
+    if (state.entryNodeMode === false) return;
+    setState({ headPosition: coordinates });
   }
 
   //Event Listener for establishing position of the "target" node. Updates the state "headPosition" with value "coordinates" 
-  eventHandlers.handleTarget = (coordinates) => {
+  eventHandlers.handleTarget = (coordinates, state, setState) => {
     //coordinates = '0,2'
-    if (this.state.targetNodeMode === false) return;
-    this.setState({ targetPosition: coordinates });
+    if (state.targetNodeMode === false) return;
+    setState({ targetPosition: coordinates });
   }
 
   //Helper function to reset state to default position.
-  eventHandlers.clearBoard = () => {
-    const board = {};
-    for (let i = 0; i < 15; i++) {
-      for (let j = 0; j < 30; j++) {
-        board[`${i},${j}`] = {
-          visited: false,
-        };
-      }
-    }
-    this.setState({
-      board: board,
-      mouseIsPressed: false,
-      entryNodeMode: false,
-      targetNodeMode: false,
-      wallMode: false,
-      path: [],
-      onFire: [],
-    });
-  }
+  
 
-  export default eventHandlers
+  export default eventHandlers;

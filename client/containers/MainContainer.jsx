@@ -13,7 +13,7 @@ import React, { Component } from 'react';
 import Navbar from '../Navbar.jsx';
 import '../styles.scss';
 import Nissan from './Nissan.jsx';
-import Board from './Board.jsx';
+import Board from './board.jsx';
 
 
 // import from child components...
@@ -123,7 +123,7 @@ class MainContainer extends Component {
         <div className="gap"></div>
         {/* Main grid container */}
         <div className="gridContainer">
-          <Board state={this.state} />
+          <Board state={this.state} setState={this.setState} />
         </div>
       </div>
     );
