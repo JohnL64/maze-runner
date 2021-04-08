@@ -105,13 +105,16 @@ class MainContainer extends Component {
   }
 
   clearBoard() {
-    const board = {};
-    for (let i = 0; i < 15; i++) {
-      for (let j = 0; j < 30; j++) {
-        board[`${i},${j}`] = {
-          visited: false,
-        };
+    if (this.state.onFire.length < 1) {
+      const board = {};
+      for (let i = 0; i < 15; i++) {
+        for (let j = 0; j < 30; j++) {
+          board[`${i},${j}`] = {
+            visited: false,
+          };
+        }
       }
+      this.setState({...this.state, board: board, path: []});
     }
   }
 
