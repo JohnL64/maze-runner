@@ -14,7 +14,7 @@ import Navbar from '../Navbar.jsx';
 import '../styles.scss';
 import Nissan from './Nissan.jsx';
 import Board from './Board.jsx';
-import EventHandlers from './eventHandlers.jsx';
+
 
 // import from child components...
 
@@ -112,7 +112,7 @@ class MainContainer extends Component {
         <div className="navbar">
           {/* Render Navbar, passing in functions for the buttons as props */}
           <Navbar
-            clearBoard={EventHandlers.clearBoard}
+            clearBoard={this.clearBoard}
             runAlgo={Nissan.algorithm}
             addWallMode={this.addWallMode}
             entryNodeMode={this.entryNodeMode}
@@ -123,7 +123,7 @@ class MainContainer extends Component {
         <div className="gap"></div>
         {/* Main grid container */}
         <div className="gridContainer">
-          <Board state={this.state} EventHandlers={EventHandlers} />
+          <Board state={this.state} />
         </div>
       </div>
     );
