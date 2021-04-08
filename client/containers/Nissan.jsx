@@ -4,11 +4,11 @@ import '../styles.scss';
 const nissan = {};
 
 //Start of the Dijkstra's algorithm
-nissan.algorithm = (props) => {
+nissan.algorithm = (state, setState) => {
   /////
-  if (props.state.path.length !== 0) {
+  if (state.path.length !== 0) {
     // BOARD - this tracks a state of the board - REMEMBER: Board is a GIANT obj {'0,0': {visted:false}, '0,1': {visted:false}, ...}
-    const board = Object.assign(props.state.board);
+    const board = Object.assign(state.board);
     console.log('1', JSON.stringify(board));
     for (const property in board) {
       // console.log(this.state.board[property])
@@ -18,14 +18,14 @@ nissan.algorithm = (props) => {
       if (board[property].previousNode) delete board[property].previousNode;
     }
     console.log('2', JSON.stringify(board));
-    props.setState({
+    setState({
       board: board,
       path: [],
     });
-  };
+  }
   
   // NODES - is a copy of the board state
-  const nodes = Object.assign(props.state.board);
+  const nodes = Object.assign(state.board);
   // for (let i = 0; i < 10; i++) {
   //   for (let j = 0; j < 10; j++) {
   //     nodes[`${i},${j}`] = {
@@ -35,9 +35,9 @@ nissan.algorithm = (props) => {
   // }
 
   // HEAD - tracks start position, is a string 'x,y' which is also a prop in the board 
-  const head = props.state.headPosition;
+  const head = state.headPosition;
   // TARGET - tracks target position, is a string 'y,x' which is also a prop in the board 
-  const target = props.state.targetPosition;
+  const target = state.targetPosition;
   // const target = nodes['2,1']
 
   // Changes the NodeBoard, head position visited defaulting to true
@@ -53,7 +53,7 @@ nissan.algorithm = (props) => {
   // Creating QUEUE array
   // Each element is an object
   // We initialize to have 1 obj with a prop of the head coordinates from the regular Board. An array coerced into a string as the key
-    // And it's value is the head coordinates from the NodeBoard
+  // And it's value is the head coordinates from the NodeBoard
 
   /* example
   queue = [
@@ -69,7 +69,7 @@ nissan.algorithm = (props) => {
   const queue = [{ [head]: nodes[head] }];
 
   // FIRE is a shallow copy of the onFire array from state 
-  const fire = props.state.onFire.slice();
+  const fire = state.onFire.slice();
 
   // // console.log(nodes)
 
@@ -113,7 +113,7 @@ nissan.algorithm = (props) => {
     
     // Extracting value of the zero index of position. It was only an array with a single element anyway.
     // string -> '0,0' example
-    let string = position[0];
+    const string = position[0];
     
     // Further conversion to turn the string of coordinates into a array of coordinates, using split
     // 'arrPosition -> ['0', '0']
@@ -217,7 +217,7 @@ nissan.algorithm = (props) => {
   setTimeout(
     function () {
       console.log('settimeeout');
-      return props.setState({
+      return setState({
         onFire: [],
         path: path,
       });
@@ -226,7 +226,7 @@ nissan.algorithm = (props) => {
   );
   
   // updates state with set state and passes in the assembled path and finalFire values
-  props.setState({ path: path, onFire: finalFire });
-}
+  setState({ path: path, onFire: finalFire });
+};
 
-  export default nissan;
+export default nissan;
