@@ -5,10 +5,10 @@ const db = require('../server/models/postgresModel');
 const server = 'http://localhost:3010';
 
 
-describe('All tests', () => {
-  describe('Put tests here', () => {});
-  describe('Put tests here', () => {});
-  describe('Put tests here', () => {});
-  describe('Put tests here', () => {});
-  describe('Put tests here', () => {});
+xdescribe('All tests', () => {
+  xdescribe('Put tests here', () => {});
+  xdescribe('Put tests here', () => {});
+  xdescribe('Put tests here', () => {});
+  xdescribe('Put tests here', () => {});
+  xdescribe('Put tests here', () => {});
 });
