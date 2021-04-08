@@ -7,7 +7,7 @@ import Navbar from '../client/Navbar';
 
 configure({adapter: new Adapter()});
 
-xdescribe('All enzyme tests', () => {
+describe('All enzyme tests', () => {
   xdescribe('Put tests here', () => {});
   xdescribe('Put tests here', () => {});
   xdescribe('Put tests here', () => {});
@@ -22,9 +22,40 @@ xdescribe('All enzyme tests', () => {
       runAlgo: jest.fn(),
 
     };
+    expect("after some action, runAlgo").toBeInvoked(2)
+
+
+
     beforeAll(() => {
       wrapper = shallow(<Navbar {...props} />);
     });
+
+    it('Should generate all buttons', () => {
+      expect(wrapper.find('.navbarButton')).toHaveLength(5);
+    })
+
+    describe('Head Button', () => {
+      it('Should execute function when clicked', () => {
+
+      })
+    })
+    describe('Target Button', () => {
+
+    })
+    describe('Add Wall Button', () => {
+
+    })
+    describe('Clear Board Button', () => {
+
+    })
+    describe('Run Algo Button', () => {
+
+    })
+
+
+
+
+
 
   });
 });
