@@ -15,7 +15,12 @@ xdescribe('All enzyme tests', () => {
   describe('Nav Button Tests', () => {
     let wrapper;
     const props = {
-      
+      entryNodeMode: jest.fn(),
+      targetNodeMode: jest.fn(),
+      addWallMode: jest.fn(),
+      clearBoard: jest.fn(),
+      runAlgo: jest.fn(),
+
     };
     beforeAll(() => {
       wrapper = shallow(<Navbar {...props} />);
