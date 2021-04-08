@@ -5,9 +5,9 @@ const nissan = {};
 
 //Start of the Dijkstra's algorithm
 nissan.algorithm = (props) => {
+  /////
   if (props.state.path.length !== 0) {
     // BOARD - this tracks a state of the board - REMEMBER: Board is a GIANT obj {'0,0': {visted:false}, '0,1': {visted:false}, ...}
-
     const board = Object.assign(props.state.board);
     console.log('1', JSON.stringify(board));
     for (const property in board) {
