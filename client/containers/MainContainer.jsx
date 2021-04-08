@@ -38,8 +38,8 @@ class MainContainer extends Component {
     this.addWallMode = this.addWallMode.bind(this);
     this.entryNodeMode = this.entryNodeMode.bind(this);
     this.targetNodeMode = this.targetNodeMode.bind(this);
-    //this.algorithm = this.algorithm.bind(this);
-    //this.clearBoard = this.clearBoard.bind(this);
+    this.clearBoard = this.clearBoard.bind(this);
+    this.setState = this.setState.bind(this);
   }
 
   // [{x:0, y:0}, {x:0, y:1}, {x:0, y:2} {x:1, y:0}, {x:1, y:1}, {x:1, y:2}]
@@ -104,6 +104,18 @@ class MainContainer extends Component {
     );
   }
 
+  clearBoard() {
+    const board = {};
+    for (let i = 0; i < 15; i++) {
+      for (let j = 0; j < 30; j++) {
+        board[`${i},${j}`] = {
+          visited: false,
+        };
+      }
+    }
+  }
+
+
   // kicking off the render for the whole application
   render() {
     //Final Render
@@ -113,7 +125,7 @@ class MainContainer extends Component {
           {/* Render Navbar, passing in functions for the buttons as props */}
           <Navbar
             clearBoard={this.clearBoard}
-            runAlgo={Nissan.algorithm}
+            runAlgo={() => Nissan.algorithm(this.state, this.setState)}
             addWallMode={this.addWallMode}
             entryNodeMode={this.entryNodeMode}
             targetNodeMode={this.targetNodeMode}
