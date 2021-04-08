@@ -7,11 +7,11 @@ import Navbar from '../client/Navbar';
 
 configure({adapter: new Adapter()});
 
-describe('All enzyme tests', () => {
-  describe('Put tests here', () => {});
-  describe('Put tests here', () => {});
-  describe('Put tests here', () => {});
-  describe('Put tests here', () => {});
+xdescribe('All enzyme tests', () => {
+  xdescribe('Put tests here', () => {});
+  xdescribe('Put tests here', () => {});
+  xdescribe('Put tests here', () => {});
+  xdescribe('Put tests here', () => {});
   describe('Nav Button Tests', () => {
     let wrapper;
     const props = {

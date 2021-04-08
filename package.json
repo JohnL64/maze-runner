@@ -9,7 +9,7 @@
     "dev-windows": "cross-env process.env.NODE_ENV=development concurrently \"webpack serve --open --inline --progress\" \" npm start\"",
     "start-secondary": "cross-env NODE_ENV=development webpack serve --open --inline --progress",
     "start": "nodemon server/server.js",
-    "test": "echo Error: we don't have a test specified yet"
+    "test": "jest --verbose"
   },
   "repository": {
     "type": "git",
