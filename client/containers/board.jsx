@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/mouse-events-have-key-events */
 import React, { Component } from 'react';
-import EventHandlers from './eventHandlers.jsx';
+import eventHandlers from './eventHandlers.jsx';
 import Button from './button.jsx';
 //import '../styles.scss'; // Pretty sure we don't need to import this here anymore
 
@@ -52,12 +52,12 @@ const Board = (props) => {
         id={id}
         key={id}
         className={className}
-        onMouseDown={() => { EventHandlers.handleMouseDown(property); }}
-        onMouseOver={() => { EventHandlers.handleMouseEnter(property); }}
-        onMouseUp={() => { EventHandlers.onMouseUp(property); }}
+        onMouseDown={() => { eventHandlers.handleMouseDown(property, props.state, props.setState); }}
+        onMouseOver={() => { eventHandlers.handleMouseEnter(property, props.state, props.setState); }}
+        onMouseUp={() => { eventHandlers.handleMouseUp(props.state, props.setState); }}
         onClick={() => {
-          EventHandlers.handleHead(property);
-          EventHandlers.handleTarget(property);
+          eventHandlers.handleHead(property, props.state, props.setState);
+          eventHandlers.handleTarget(property, props.state, props.setState);
         }}
       />
     );
