@@ -15,7 +15,7 @@ button {
 
 
 body {
-	background-color: #1f1f1f;
+	background-color: #efefef;
 }
 
 p {
@@ -23,14 +23,14 @@ p {
 	margin-block-end: 0.1em;
 	font-size: 40px;
 	font-weight: bold;
-	color: white;
+	color: #1f1f1f;
 	text-align: center;
 	font-family: 'Suez One', serif;
 }
 
 h1 {
-	background-color: #1f1f1f;
-	color: white;
+	color: #1f1f1f;
+	color: rgb(48, 48, 48);
 	text-align: center;
 	font-family: 'Suez One', serif;
 }
@@ -67,36 +67,43 @@ h1 {
 	}
 }
 
+.gridContainer button {
+	border-left: 1px dashed #cccccc;
+	border-top: 1px dashed #cccccc;
+	border-bottom: 1px dashed #cccccc;
+	border-right: 1px dashed #cccccc;
+}
+
 .wallGrid {
-	background-color: black;
-	opacity: 0.3;
+	background-color: #8d8d8d;
 }
 .regularGrid {
 	background-color:white;
 }
 
 .head {
-	background-color: rgb(41, 127, 197);
-	background: url('https://media.tenor.com/images/46b8aa3319ea36727ca0b0dc702cbcbd/tenor.gif');
+	//background-color: rgb(255, 244, 93);
+	background: url('https://media1.tenor.com/images/a00a664cd3c7df711f99bc8bb868f947/tenor.gif');
+	//background: url('https://media.tenor.com/images/46b8aa3319ea36727ca0b0dc702cbcbd/tenor.gif');
 	// background: url('https://i1.sndcdn.com/avatars-000233416099-iokp17-t500x500.jpg');
 	background-size: cover;
 	background-position: center;
 	background-repeat: no-repeat;
-	opacity: 1.0;
+	opacity: 1;
 }
 
 .target {
-	/* background: rgb(101, 101, 204); */
-	background: url('https://yt3.ggpht.com/ytc/AAUvwnh_qb-oVGuDhNc7IPtKIXXUTzH56th0i8hU5ieibFA=s900-c-k-c0x00ffffff-no-rj');
+	background: url('https://media1.tenor.com/images/032c442770f6413f3ad74189a3f130f4/tenor.gif');
+	//background: url('https://yt3.ggpht.com/ytc/AAUvwnh_qb-oVGuDhNc7IPtKIXXUTzH56th0i8hU5ieibFA=s900-c-k-c0x00ffffff-no-rj');
 	// background: url('https://i.pinimg.com/originals/6d/b0/32/6db0321da5910a614765c4f756677f5e.png');
 	background-size: cover;
 	background-position: center;
 	background-repeat: no-repeat;
-	opacity: 1.0;
+	opacity: 1;
 }
 
 .path {
-	background-color: white;
+	background-color: rgb(224, 77, 18);
 	animation:addBlock 0.2s;
 	animation-fill-mode: forwards;
 	border-radius:0px;
@@ -109,12 +116,12 @@ h1 {
 
 @keyframes addBlock{
 	0%   {background-color: white;}
-  100% {background-color: rgb(168, 15, 15); opacity: 0.9}
+  100% {background-color: rgb(235, 66, 15); opacity: 0.9}
 }
 
 @keyframes onFire {
 	0%   {background-color: transparent; opacity: 0}
-	100% {background-color: rgb(73, 190, 236); opacity: 0.3}
+	100% {background-color: rgb(255, 209, 59); opacity: 0.9}
 
 }
 
