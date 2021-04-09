@@ -9,7 +9,7 @@ nissan.algorithm = (state, setState) => {
   if (state.path.length !== 0) {
     // BOARD - this tracks a state of the board - REMEMBER: Board is a GIANT obj {'0,0': {visted:false}, '0,1': {visted:false}, ...}
     const board = Object.assign(state.board);
-    console.log('1', JSON.stringify(board));
+    // console.log('1', JSON.stringify(board));
     for (const property in board) {
       // console.log(this.state.board[property])
       // Looks like we're resetting all visited values to false at the start of the Algo
@@ -17,7 +17,7 @@ nissan.algorithm = (state, setState) => {
       // Resetting any previous board props that had a previousNode prop and 
       if (board[property].previousNode) delete board[property].previousNode;
     }
-    console.log('2', JSON.stringify(board));
+    // console.log('2', JSON.stringify(board));
     setState({
       board: board,
       path: [],
@@ -76,7 +76,7 @@ nissan.algorithm = (state, setState) => {
   // HELPER - function with two parameters, both are arrays.
   function helper(queue, fire) {
     // console.log('base queue every time helper is called', JSON.stringify(queue))
-    console.log('fireeee', fire);
+    // console.log('fireeee', fire);
     for (let i = 0; i < queue.length; i++) {
       // Looping through queue array to find the target coordinates
       if (Object.keys(queue[i]) == target) {
@@ -97,7 +97,7 @@ nissan.algorithm = (state, setState) => {
           previousNode = nodes[previousNode].previousNode;
         }
         // console.log('inside base case', JSON.stringify(nodes));
-        console.log('path1', path);
+        // console.log('path1', path);
         return path;
       }
     }
@@ -174,7 +174,7 @@ nissan.algorithm = (state, setState) => {
     // After the helper logic has been performed remove the first node from the queue with shift
     queue.shift();
     // console.log to check the new queue list
-    console.log('queue', queue);
+    // console.log('queue', queue);
     // Base case, if the queue is now empty, return undefined
     if (queue.length === 0) {
       return undefined;
@@ -203,8 +203,8 @@ nissan.algorithm = (state, setState) => {
   
   // console.log(helper(queue))
   // console.log('2', path)
-  console.log('path', path);
-  console.log('fire', fire);
+  // console.log('path', path);
+  // console.log('fire', fire);
 
   // removes the ending position of fire which would be the head. Don't need to do anything on the initial path finder head square
   // that's our character

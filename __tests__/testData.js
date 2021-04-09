@@ -452,4 +452,4 @@ testData.initialBoardState = {
   '14,28': { visited: false },
   '14,29': { visited: false } };
 
-export default testData;
+module.exports = testData;
